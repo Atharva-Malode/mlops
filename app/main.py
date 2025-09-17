@@ -4,8 +4,20 @@ from ultralytics import YOLO
 from PIL import Image
 from io import BytesIO
 import numpy as np
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # <-- allow requests from any origin
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Load YOLO model once at startup
 model = YOLO("yolo11n.pt")
